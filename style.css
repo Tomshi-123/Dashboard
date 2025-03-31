@@ -21,7 +21,7 @@ body {
     padding: 0; 
 }
 
-.nav{
+.timeNav{
     display: flex;   
     background-color: rgba(247, 247, 247, 0.555);
     backdrop-filter: blur(5px);
@@ -31,16 +31,38 @@ body {
     margin-top: 1%;
     margin-bottom:90px;
     border-radius: 80px;
+    justify-content: center;
+}
+
+#date, #clock {
+    font-size: 18px;
+    color: rgb(0, 0, 0);
+    font-family:"poppins";
+    align-self: center;
+    margin: 25px; 
 }
 
 .dashBoardHeadline {
+    display: flex;
     font-family:"poppins";
     align-self: center;
     margin-bottom: 80px;
     color: rgb(239, 244, 243);
     font-size: 20px;
-    
+    align-items: column;    
 }
+
+.edit-icon {
+    margin-left: 10px;
+    cursor: pointer;
+    font-size: 15px;
+    color: rgb(200, 195, 195);
+}
+
+.edit-icon:hover {
+    color: black;
+}
+
 
 .dashboardContainer {
     display: grid; 
@@ -52,7 +74,8 @@ body {
 }
 
 .data-main {
-    width: 100%; 
+    max-height: 500px;
+    width: 350px;
     margin: 0 auto; 
     text-align: center; 
     border-radius: 5px; 
@@ -65,25 +88,113 @@ body {
     backdrop-filter: blur(8px);
     border-radius: 20px;
     gap: 10px;
+    
+}
+
+#links {
+    display: flex;
+    flex-direction: column; 
+    justify-content: flex-end; 
+    height: 100%; 
 }
 
 
 
 .cardContainer {
-    height: 90%;
+    max-height: 90%;
+    overflow: auto;
 
 }
 
 
 
 .card {
+    position: relative; /* För att placera krysset relativt till kortet */
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     width: 320px;
     height: 60px;
     background-color: rgba(204, 255, 255, 0.488);
-    margin: 5px;
+    margin: 10px;
     border-radius: 10px;
+    padding: 10px;
+    font-family: "Poppins", sans-serif;
+}
 
+.card img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer; /* Gör loggan klickbar */
+}
+
+.card .removeButton {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 14px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.card .removeButton:hover {
+    background-color: rgb(126, 143, 244);
+}
+
+.cardText {
+    margin-right: 40%;
+}
+
+
+.inputLink {
+    margin-top: auto; /* Trycker knappen till botten */
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+}
+
+.inputLink button {
+    height: 40px;
+    width: 40px;
+    border-top-right-radius: 80px;
+    border-bottom-right-radius: 80px;
+    background-color: transparent;
+    border: 2px solid rgb(239, 239, 255);
+    color: white;
+    cursor: pointer;
+}
+
+.inputLink button:hover{
+    border: 2px solid rgb(103, 172, 251);
+    color: rgb(103, 172, 251);
+}
+
+input {
+    padding-left: 20px;
+    font-weight: bold;
+    background-color: transparent;
+    border: 2px solid rgb(239, 239, 255);
+    height: 40px;
+    border-top-left-radius: 80px;
+    border-bottom-left-radius: 80px;
+    margin-bottom: 15px;
+    outline: none;
+}
+
+input:focus {
+    border: 2px solid rgb(103, 172, 251);
 }
 
 
