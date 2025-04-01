@@ -1,6 +1,7 @@
 import "./js/links.js";
 import "./js/time.js";
 import "./js/randomImage.js";
+import "./js/title.js";
 
 
 // Om du vill skriva något direkt när DOM är laddad:

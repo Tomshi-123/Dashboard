@@ -45,13 +45,13 @@ function createCard(url, name) {
 
 //Funktion för lägga till länk-knappen 
 
-document.getElementById('addLinkButton').addEventListener('click', function AddLinkClick() 
-{
+// Funktion för lägga till länk-knappen
+document.getElementById('addLinkButton').addEventListener('click', function AddLinkClick() {
     const input = document.getElementById('linkInput');
     const name = input.value.trim();
 
     if (!name) {
-        alert('Skriv en gilting hemsida');
+        alert('Skriv en giltig hemsida');
         return;
     }
 
@@ -64,4 +64,12 @@ document.getElementById('addLinkButton').addEventListener('click', function AddL
     createCard(url, name);
 
     input.value = '';
-})
+});
+
+// Lägg till stöd för "Enter"-tangenten
+document.getElementById('linkInput').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Förhindra att formuläret skickas (om det är ett formulär)
+        document.getElementById('addLinkButton').click(); // Simulera ett klick på knappen
+    }
+});
