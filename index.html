@@ -41,9 +41,14 @@
     </div>
 
     <div id="weather" class="data-main">
+        <h2>Weather Forecast</h2>
 
-
-                <!-- <p >Fetching data...</p> -->
+        <input id="city" type="text" placeholder="Enter city">
+        <button id="weatherBtn" onclick="getWeather()">Get Weather</button>
+        <div id="temp-div"></div>
+        <div id="weather-info"></div>
+        <img id="weather-icon" style="display: none;" alt="Weather Icon">
+        <div id="hourly-forecast"></div>        <!-- <p >Fetching data...</p> -->
 
 
     </div>
