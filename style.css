@@ -212,6 +212,26 @@ body {
     border-radius: 80px;
 }
 
+#city:focus {
+    border: 2px solid rgb(103, 172, 251);
+}
+
+#weatherBtn {
+    width: 100px;
+    height: 20px;
+    border-radius: 70px;
+    background-color: transparent;
+    backdrop-filter: blur(8px);
+    border: none;
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.378);
+    font-family:"poppins";
+    cursor: pointer;
+}
+
+#weatherBtn:hover {
+    box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.695);
+}
+
 #weather {
     display: flex;
     flex-direction: column;
@@ -246,18 +266,22 @@ body {
 
 #hourly-forecast {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: flex-start; 
     gap: 10px;
-    overflow-y: auto;
+    overflow-x: auto; 
     max-height: 200px;
     width: 100%;
+    padding: 10px; 
+    box-sizing: border-box; 
 }
 
 .hourly-item {
     text-align: center;
     font-size: 0.9rem;
-    flex: 0 0 80px;
+    flex: 0 0 auto; 
+    width: 80px; 
+    box-sizing: border-box; 
 }
 /*---------------------WEATHER--------------*/
 
@@ -289,6 +313,36 @@ footer {
     cursor: pointer;
     color: rgb(255, 255, 255);
 }
+
+
+
+#notes {
+    display:flex;
+    flex-direction: column;
+    text-align: center;
+    font-family:"poppins";
+    font-size: 15px;
+
+}
+
+
+#noteTextare {
+    width: 90%;
+    height:80%;
+    background: transparent;
+    backdrop-filter: blur(0px);
+    border-radius: 8px;
+    resize: none;
+    padding-left: 10px;
+    font-size: 18px;
+    font-family:"poppins";
+}
+
+
+
+
+
+
 
 @media (max-width: 1281px) {
     .dashboardContainer {

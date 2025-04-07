@@ -35,7 +35,7 @@ function createCard(url, name) {
     });
 
     // Lägg till länken, texten och knappen i kortet
-    card.appendChild(link); // Loggan är klickbar
+    card.appendChild(link); 
     card.appendChild(text);
     card.appendChild(removeButton);
 
@@ -43,7 +43,7 @@ function createCard(url, name) {
     cardContainer.appendChild(card);
 }
 
-//Funktion för lägga till länk-knappen 
+
 
 // Funktion för lägga till länk-knappen
 document.getElementById('addLinkButton').addEventListener('click', function AddLinkClick() {
@@ -72,4 +72,12 @@ document.getElementById('linkInput').addEventListener('keydown', function (event
         event.preventDefault(); // Förhindra att formuläret skickas (om det är ett formulär)
         document.getElementById('addLinkButton').click(); // Simulera ett klick på knappen
     }
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+    const links = JSON.parse(localStorage.getItem('links')) || [];
+
+    links.forEach(link => {
+        createCard(link.url, link.name);
+    });
 });

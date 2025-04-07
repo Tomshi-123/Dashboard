@@ -3,6 +3,7 @@ import "./js/time.js";
 import "./js/randomImage.js";
 import "./js/title.js";
 import "./js/weather.js";
+import "./js/notes.js";
 
 
 // Om du vill skriva något direkt när DOM är laddad:
