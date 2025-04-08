@@ -287,6 +287,55 @@ body {
 /*---------------------WEATHER--------------*/
 
 
+/*---------------------NEWS-------------*/
+
+#news {
+    overflow: auto;
+    background-color: rgba(56, 55, 92, 0.652);
+}
+
+#news-container {
+    align-self: flex-start;
+    display: flex;
+    flex-direction: column;
+    justify-content:center;
+    align-items:center;
+    gap: 0px;
+  }
+  
+  .news-article {
+    display:grid;
+    grid-template-rows:auto;
+    background-color: transparent;
+    padding: 15px;
+    height: 300px;
+    overflow:hidden;
+    border-bottom: 1px solid white;
+  }
+  
+  .news-article h3 a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  
+  .news-article h3 a:hover {
+    color: #007BFF;
+  }
+  
+  .news-article img {
+    max-width: 100%;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  #news::-webkit-scrollbar {
+      width: 6px; 
+      height: 6px; 
+  }
+
+/*---------------------NEWS-------------*/
+
 footer {
     font-family:"poppins";
     display: flex;   
