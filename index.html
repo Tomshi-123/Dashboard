@@ -3,42 +3,35 @@
 <head>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-    integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-    crossorigin="anonymous" referrerpolicy="no-referrer">
+          integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
+          crossorigin="anonymous" referrerpolicy="no-referrer">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
 </head>
 <body>
 
-
 <header class="timeNav">
     <div id="date"></div>
     <div id="clock"></div>
 </header>
 
-
 <div class="dashBoardHeadline">
-<h1 id="dashboardTitle" >My Dashboard</h1>
-<i class="fas fa-pen edit-icon" id="editTitleButton"></i>
+    <h1 id="dashboardTitle">My Dashboard</h1>
+    <i class="fas fa-pen edit-icon" id="editTitleButton"></i>
 </div>
-
 
 <div class="dashboardContainer">
 
     <div id="links" class="data-main">
+        <h2>My Shortcuts:</h2>
 
-    <div class="cardContainer" id="cardContainer">
-        
+        <div class="cardContainer" id="cardContainer"></div>
 
-
-    </div>
-
-    <div class="inputLinkDiv">
-    <input id="linkInput" type="text">
-    <button id="addLinkButton"><i class="fas fa-search"></i></button>
-    </div>
-
+        <div class="inputLinkDiv">
+            <input id="linkInput" type="text">
+            <button id="addLinkButton"><i class="fas fa-search"></i></button>
+        </div>
     </div>
 
     <div id="weather" class="data-main">
@@ -46,37 +39,30 @@
 
         <input id="city" type="text" placeholder="Enter city">
         <button id="weatherBtn" onclick="getWeather()">Get Weather</button>
+
         <div id="temp-div"></div>
         <div id="weather-info"></div>
-        <img id="weather-icon" src="default-weather-icon.png" style="display: none;" alt="Weather Icon">
-        <div id="hourly-forecast"></div>        <!-- <p >Fetching data...</p> -->
-
-
+        <img id="weather-icon" src="#" style="display: none;" alt="Weather Icon">
+        <div id="hourly-forecast"></div>
     </div>
 
     <div id="news" class="data-main">
-
-        <div id="news-container">
-
-        </div>
-
+        <div id="news-container"></div>
     </div>
 
     <div id="notes" class="data-main">
-
-    <h2>My notepad</h2>
-
-    <textarea id="noteTextare"></textarea>
-
+        <h2>My Notepad</h2>
+        <textarea id="noteTextare"></textarea>
     </div>
-
 
 </div>
 
 <footer>
-    <p>Randomize background</p><button id="randomBtn"><i class="fas fa-sync-alt"></i> </button>
+    <p>Randomize background</p>
+    <button id="randomBtn"><i class="fas fa-sync-alt"></i></button>
 </footer>
 
-    <script src="main.js" type="module"></script>
-   </body>
+<script src="/js/main.js" type="module"></script>
+
+</body>
 </html>

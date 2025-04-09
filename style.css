@@ -82,7 +82,7 @@ body {
     text-align: center; 
     border-radius: 5px; 
     display: flex;
-    grid-template-columns: 1fr, 1fr;
+    grid-template-columns: 1fr 1fr;
     justify-content: center; 
     align-items: center; 
     min-height: 500px; 
@@ -103,7 +103,11 @@ body {
     height: 100%; 
 }
 
-
+#links h2{
+    font-size: 20px;
+    font-family:'poppins';
+    margin-top: 10px;
+}
 
 .cardContainer {
     max-height: 90%;
