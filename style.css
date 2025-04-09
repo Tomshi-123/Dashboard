@@ -50,15 +50,14 @@ body {
     align-self: center;
     margin-bottom: 80px;
     color: rgb(239, 244, 243);
-    font-size: 20px;
-    align-items: column;    
+    font-size: 20px;  
 }
 
 .edit-icon {
     margin-left: 10px;
     cursor: pointer;
     font-size: 15px;
-    color: rgb(200, 195, 195);
+    color: rgb(255, 255, 255);
 }
 
 .edit-icon:hover {
@@ -83,7 +82,7 @@ body {
     text-align: center; 
     border-radius: 5px; 
     display: flex;
-    grid-template-columns: 1, 1fr;
+    grid-template-columns: 1fr, 1fr;
     justify-content: center; 
     align-items: center; 
     min-height: 500px; 
@@ -92,6 +91,10 @@ body {
     border-radius: 20px;
     gap: 10px;
 }
+
+
+/*---------------------LINKS--------------*/
+
 
 #links {
     display: flex;
@@ -159,7 +162,7 @@ body {
 }
 
 
-.inputLink {
+.inputLinkDiv {
     margin-top: auto; /* Trycker knappen till botten */
     color: white;
     padding: 10px 20px;
@@ -168,7 +171,7 @@ body {
     text-align: center;
 }
 
-.inputLink button {
+.inputLinkDiv button {
     height: 40px;
     width: 40px;
     border-top-right-radius: 80px;
@@ -179,7 +182,7 @@ body {
     cursor: pointer;
 }
 
-.inputLink button:hover{
+.inputLinkDiv button:hover{
     border: 2px solid rgb(103, 172, 251);
     color: rgb(103, 172, 251);
 }
@@ -199,6 +202,9 @@ body {
 #linkInput:focus {
     border: 2px solid rgb(103, 172, 251);
 }
+
+/*---------------------LINKS--------------*/
+
 
 
 /*---------------------WEATHER--------------*/
@@ -336,33 +342,9 @@ body {
 
 /*---------------------NEWS-------------*/
 
-footer {
-    font-family:"poppins";
-    display: flex;   
-    background-color: rgba(247, 247, 247, 0.555);
-    backdrop-filter: blur(5px);
-    min-width: 15%;
-    height: 30px;
-    align-self: center;
-    margin-top: 70px;
-    border-radius: 80px;
-    align-items:center;
-    justify-content: center;
-}
 
-#randomBtn {
-    margin-left: 10px;
-    height: 25px;
-    width: 25px;
-    font-size: 20px;
-    background-color: transparent;
-    border: none;
-}
 
-#randomBtn:hover {
-    cursor: pointer;
-    color: rgb(255, 255, 255);
-}
+/*---------------------NOTES-------------*/
 
 
 
@@ -387,18 +369,52 @@ footer {
     padding-top: 10px;
     font-size: 18px;
     font-family:"poppins";
-    border: none;
+    border: 0.1px solid rgba(0, 0, 0, 0.49);
     outline: none;
     box-shadow: inset 0px 0px 8px 2px rgba(0, 0, 0, 0.325);
 }
 
+/*---------------------NOTES-------------*/
 
 
+/*---------------------RANDOM-IMAGE-------------*/
+
+footer {
+    font-family:"poppins";
+    display: flex;   
+    background-color: rgba(247, 247, 247, 0.555);
+    backdrop-filter: blur(5px);
+    min-width: 15%;
+    height: 30px;
+    align-self: center;
+    margin-top: 70px;
+    border-radius: 80px;
+    align-items:center;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+#randomBtn {
+    margin-left: 10px;
+    height: 25px;
+    width: 25px;
+    font-size: 20px;
+    background-color: transparent;
+    border: none;
+}
+
+#randomBtn:hover {
+    cursor: pointer;
+    color: rgb(255, 255, 255);
+}
+
+/*---------------------RANDOM-IMAGE-------------*/
 
 
+/*---------------------RESPONSIVE PART-------------*/
 
 
-@media (max-width: 1281px) {
+@media (max-width: 1332px) {
     .dashboardContainer {
         grid-template-columns: repeat(2, 1fr); /* Två per rad istället för en */
         width: 100%;
@@ -409,13 +425,12 @@ footer {
     }
 
     footer {
-        font-size: 12px; /* Minska textstorleken i footern */
-        width: 100%; /* Gör att footern fyller hela bredden */
-        margin-top: 20px;
+        padding-left:5px;
+        padding-right:5px;
     }
 }
 
-@media (max-width: 500px) {
+@media (max-width: 790px) {
     .dashboardContainer {
         grid-template-columns: 1fr; /* Bara en per rad */
     }
