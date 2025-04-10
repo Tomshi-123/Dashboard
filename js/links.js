@@ -9,12 +9,12 @@ function createCard(url, name) {
     // Skapa en länk för loggan
     const link = document.createElement('a');
     link.href = url;
-    link.target = '_blank'; // Öppna länken i en ny flik
+    link.target = '_blank'; 
 
     const img = document.createElement('img');
     img.src = `https://www.google.com/s2/favicons?sz=64&domain=${url}`;
     img.alt = `${name} logo`;
-    link.appendChild(img); // Lägg till bilden i länken
+    link.appendChild(img); 
 
     const text = document.createElement('span');
     text.className = 'cardText'; 
@@ -23,9 +23,9 @@ function createCard(url, name) {
     // Skapa en knapp för att ta bort kortet
     const removeButton = document.createElement('button');
     removeButton.className = 'removeButton';
-    removeButton.textContent = '×'; // Kryss-symbol
+    removeButton.textContent = '×'; 
     removeButton.addEventListener('click', function (event) {
-        event.stopPropagation(); // Förhindra att klicket på knappen triggar länken
+        event.stopPropagation(); 
         card.remove();
 
         // Ta bort kortet från localStorage
@@ -69,8 +69,8 @@ document.getElementById('addLinkButton').addEventListener('click', function AddL
 // Lägg till stöd för "Enter"-tangenten
 document.getElementById('linkInput').addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
-        event.preventDefault(); // Förhindra att formuläret skickas (om det är ett formulär)
-        document.getElementById('addLinkButton').click(); // Simulera ett klick på knappen
+        event.preventDefault(); 
+        document.getElementById('addLinkButton').click(); 
     }
 });
 

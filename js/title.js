@@ -19,5 +19,5 @@ editButton.addEventListener('click', function () {
     }
 });
 
-// Kör funktionen för att ladda rubriken vid sidladdning
+
 loadTitle();

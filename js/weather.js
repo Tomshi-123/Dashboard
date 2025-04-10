@@ -143,7 +143,7 @@ document.getElementById("weatherBtn").addEventListener("click", function () {
 
 document.getElementById('city').addEventListener('keydown', function (event) {
     if (event.key === 'Enter') {
-        event.preventDefault(); // Förhindra att formuläret skickas (om det finns ett)
-        getWeather(); // Anropa funktionen direkt
+        event.preventDefault(); 
+        getWeather(); 
     }
 });

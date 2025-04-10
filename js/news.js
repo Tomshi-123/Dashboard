@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded", function() {
-    const apiKey = '58adfd06e3124339bd98c4c5a122f05a';  // Din API-nyckel från NewsAPI
-    const newsContainer = document.getElementById('news-container'); // Hitta elementet där nyheterna ska visas
+    const apiKey = '58adfd06e3124339bd98c4c5a122f05a';  
+    const newsContainer = document.getElementById('news-container'); 
     
     // Funktion för att hämta nyheter från NewsAPI via GET
     function fetchNews() {
