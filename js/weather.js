@@ -138,4 +138,12 @@ document.addEventListener("DOMContentLoaded", function () {
 
 document.getElementById("weatherBtn").addEventListener("click", function () {
     getWeather();
+
+});
+
+document.getElementById('city').addEventListener('keydown', function (event) {
+    if (event.key === 'Enter') {
+        event.preventDefault(); // Förhindra att formuläret skickas (om det finns ett)
+        getWeather(); // Anropa funktionen direkt
+    }
 });

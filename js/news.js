@@ -9,7 +9,7 @@ document.addEventListener("DOMContentLoaded", function() {
         // Gör en GET-förfrågan
         fetch(url)
             .then(response => {
-                // Kontrollera om svaret är ok (status 200-299)
+                // Kontrollera om svaret är ok 
                 if (!response.ok) {
                     throw new Error('Det gick inte att hämta nyheterna. Försök igen senare.');
                 }
@@ -44,6 +44,8 @@ document.addEventListener("DOMContentLoaded", function() {
             newsContainer.appendChild(articleElement);
         });
     }
+
+
     
     // Anropa funktionen för att hämta nyheter när sidan laddas
     fetchNews();
