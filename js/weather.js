@@ -1,149 +1,146 @@
-const apiKey = '3d4286229030b25633c851fe851bce41';
 
-async function getWeather() {
-    const city = document.getElementById('city').value;
-
-    if (!city) {
-        alert('Please enter a city');
-        return;
-    }
-
-    localStorage.setItem('lastCity', city);
-
-    const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
-    const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${apiKey}`;
-
-    try {
-        const responses = await Promise.all([
-            fetch(currentWeatherUrl),
-            fetch(forecastUrl)
-        ]);
-
-        const [currentWeather, forecast] = await Promise.all(responses.map(res => res.json()));
-
-        displayWeather(currentWeather);
-        displayHourlyForecast(forecast.list.slice(0, 24));
-    } catch (error) {
-        console.error('Error fetching weather data:', error);
-        alert('Error fetching weather data. Please try again.');
-    }
-}
-
-function displayWeather(data) {
-    const tempDivInfo = document.getElementById('temp-div');
-    const weatherInfoDiv = document.getElementById('weather-info');
-    const weatherIcon = document.getElementById('weather-icon');
-
-    tempDivInfo.innerHTML = '';
-    weatherInfoDiv.innerHTML = '';
-
-    const cityName = data.name;
-    const temperature = Math.round(data.main.temp - 273.15);
-    const description = data.weather[0].description;
-    const iconCode = data.weather[0].icon;
-    const iconUrl = `https://openweathermap.org/img/wn/${iconCode}@4x.png`;
-
-    const weatherData = { cityName, temperature, description, iconUrl };
-    localStorage.setItem('weatherData', JSON.stringify(weatherData));
-
-    tempDivInfo.innerHTML = `<p>${temperature}°C</p>`;
-    weatherInfoDiv.innerHTML = `<p>${cityName}</p><p>${description}</p>`;
-    weatherIcon.src = iconUrl;
-    weatherIcon.alt = description;
-    weatherIcon.style.display = 'block';
-}
-
-function displayHourlyForecast(hourlyData) {
-    const hourlyForecastDiv = document.getElementById('hourly-forecast');
-    hourlyForecastDiv.innerHTML = '';
-
-    const forecastArray = [];
-
-    hourlyData.forEach(item => {
-        const dateTime = new Date(item.dt * 1000);
-        const hour = dateTime.getHours();
-        const temperature = Math.round(item.main.temp - 273.15);
-        const iconCode = item.weather[0].icon;
-        const iconUrl = `https://openweathermap.org/img/wn/${iconCode}.png`;
-
-        const hourlyItemHtml = `
-            <div class="hourly-item">
-                <span>${hour}:00</span>
-                <img src="${iconUrl}" alt="Hourly Weather Icon">
-                <span>${temperature}°C</span>
-            </div>`;
-
-        hourlyForecastDiv.innerHTML += hourlyItemHtml;
-
-        forecastArray.push({ hour, temperature, iconUrl });
-    });
-
-    localStorage.setItem('hourlyForecastData', JSON.stringify(forecastArray));
-}
-
-async function detectLocationAndGetWeather() {
-    try {
-        const res = await fetch('https://get.geojs.io/v1/ip/geo.json');
-        const data = await res.json();
-        const userCity = data.city;
-
-        if (userCity) {
-            document.getElementById('city').value = userCity;
-            getWeather();
-        }
-    } catch (error) {
-        console.error('Kunde inte hämta plats:', error);
-    }
-}
 
 document.addEventListener("DOMContentLoaded", function () {
-    const lastCity = localStorage.getItem('lastCity');
-    const weatherData = JSON.parse(localStorage.getItem('weatherData'));
-    const hourlyForecastData = JSON.parse(localStorage.getItem('hourlyForecastData'));
+    const apiKey = "3d4286229030b25633c851fe851bce41"; // Ersätt med din OpenWeather API-nyckel
+    const weatherContainer = document.getElementById('weather-info');
+    const tempDivInfo = document.getElementById('temp-div');
+    const weatherIcon = document.getElementById('weather-icon');
+    const hourlyForecastDiv = document.getElementById('hourly-forecast');
 
-    if (lastCity) {
-        document.getElementById('city').value = lastCity;
-        getWeather();
-    } else {
-        detectLocationAndGetWeather();
+    // Funktion för att hämta väder baserat på latitud och longitud
+    function getWeatherByLocation(lat, lon) {
+        const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+        const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=metric&appid=${apiKey}`;
+
+        // Hämta aktuellt väder
+        fetch(currentWeatherUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Det gick inte att hämta väderdata.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                displayWeather(data);
+            })
+            .catch(error => {
+                console.error("Error fetching current weather data:", error);
+                weatherContainer.innerHTML = `<p>Failed to load weather data. Error: ${error.message}</p>`;
+            });
+
+        // Hämta timprognos
+        fetch(forecastUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Det gick inte att hämta timprognosen.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                displayHourlyForecast(data.list.slice(0, 8)); // Visa de kommande 8 timmarna
+            })
+            .catch(error => {
+                console.error("Error fetching hourly forecast:", error);
+                hourlyForecastDiv.innerHTML = `<p>Failed to load hourly forecast. Error: ${error.message}</p>`;
+            });
     }
 
-    if (weatherData) {
-        const tempDivInfo = document.getElementById('temp-div');
-        const weatherInfoDiv = document.getElementById('weather-info');
-        const weatherIcon = document.getElementById('weather-icon');
+    // Funktion för att visa väderdata
+    function displayWeather(data) {
+        const { name, weather, main } = data;
 
-        tempDivInfo.innerHTML = `<p>${weatherData.temperature}°C</p>`;
-        weatherInfoDiv.innerHTML = `<p>${weatherData.cityName}</p><p>${weatherData.description}</p>`;
-        weatherIcon.src = weatherData.iconUrl;
-        weatherIcon.alt = weatherData.description;
+        tempDivInfo.innerHTML = `<p>${main.temp}°C</p>`;
+        weatherContainer.innerHTML = `<p>${name}</p><p>${weather[0].description}</p>`;
+        weatherIcon.src = `https://openweathermap.org/img/wn/${weather[0].icon}@2x.png`;
+        weatherIcon.alt = weather[0].description;
         weatherIcon.style.display = 'block';
     }
 
-    if (hourlyForecastData) {
-        const hourlyForecastDiv = document.getElementById('hourly-forecast');
-        hourlyForecastDiv.innerHTML = '';
-
-        hourlyForecastData.forEach(item => {
+    // Funktion för att visa timprognos
+    function displayHourlyForecast(forecast) {
+        hourlyForecastDiv.innerHTML = ''; // Rensa tidigare prognos
+        forecast.forEach(item => {
+            const time = new Date(item.dt * 1000).getHours(); // Konvertera UNIX-tid till timmar
             const hourlyItemHtml = `
                 <div class="hourly-item">
-                    <span>${item.hour}:00</span>
-                    <img src="${item.iconUrl}" alt="Hourly Weather Icon">
-                    <span>${item.temperature}°C</span>
+                    <span>${time}:00</span>
+                    <img src="https://openweathermap.org/img/wn/${item.weather[0].icon}@2x.png" alt="Hourly Weather Icon">
+                    <span>${item.main.temp}°C</span>
                 </div>`;
             hourlyForecastDiv.innerHTML += hourlyItemHtml;
         });
     }
-});
 
-document.getElementById("weatherBtn").addEventListener("click", function () {
-    getWeather();
+    // Funktion för att hämta användarens plats med Geolocation API
+    function detectLocationAndGetWeather() {
+        if ("geolocation" in navigator) {
+            navigator.geolocation.getCurrentPosition(
+                function (position) {
+                    const latitude = position.coords.latitude;
+                    const longitude = position.coords.longitude;
 
-});
-
-document.getElementById('city').addEventListener('keydown', function (event) {
-    if (event.key === 'Enter') {
-        event.preventDefault(); 
-        getWeather(); 
+                    console.log(`Latitude: ${latitude}, Longitude: ${longitude}`);
+                    getWeatherByLocation(latitude, longitude);
+                },
+                function (error) {
+                    console.error("Error getting location:", error.message);
+                    weatherContainer.innerHTML = `<p>Failed to get location. Please allow location access.</p>`;
+                }
+            );
+        } else {
+            console.error("Geolocation is not supported by this browser.");
+            weatherContainer.innerHTML = `<p>Geolocation is not supported by your browser.</p>`;
+        }
     }
+
+    // Lägg till event listener för knappen
+    document.getElementById("weatherBtn").addEventListener("click", function () {
+        const cityInput = document.getElementById('city').value;
+        if (cityInput) {
+            getWeatherByCity(cityInput);
+        } else {
+            detectLocationAndGetWeather(); // Om ingen stad anges, använd Geolocation
+        }
+    });
+
+    // Funktion för att hämta väder baserat på stad
+    function getWeatherByCity(city) {
+        const currentWeatherUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&units=metric&appid=${apiKey}`;
+        const forecastUrl = `https://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&appid=${apiKey}`;
+
+        // Hämta aktuellt väder
+        fetch(currentWeatherUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Det gick inte att hämta väderdata för staden.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                displayWeather(data);
+            })
+            .catch(error => {
+                console.error("Error fetching weather data:", error);
+                weatherContainer.innerHTML = `<p>Failed to load weather data. Error: ${error.message}</p>`;
+            });
+
+        // Hämta timprognos
+        fetch(forecastUrl)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Det gick inte att hämta timprognosen.');
+                }
+                return response.json();
+            })
+            .then(data => {
+                displayHourlyForecast(data.list.slice(0, 8)); // Visa de kommande 8 timmarna
+            })
+            .catch(error => {
+                console.error("Error fetching hourly forecast:", error);
+                hourlyForecastDiv.innerHTML = `<p>Failed to load hourly forecast. Error: ${error.message}</p>`;
+            });
+    }
+
+    // Anropa Geolocation API när sidan laddas
+    detectLocationAndGetWeather();
 });
